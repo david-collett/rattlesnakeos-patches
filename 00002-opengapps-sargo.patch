@@ -1,0 +1,9 @@
+--- a/device/google/bonito/aosp_sargo.mk	2020-08-17 17:06:56.000000000 +1000
++++ b/device/google/bonito/aosp_sargo.mk	2020-08-26 13:11:56.113006460 +1000
+@@ -46,3 +46,6 @@
+ 
+ PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
++
++GAPPS_VARIANT := stock
++$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
