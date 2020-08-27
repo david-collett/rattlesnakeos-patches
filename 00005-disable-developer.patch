@@ -1,0 +1,22 @@
+--- a/packages/apps/Settings/src/com/android/settings/deviceinfo/BuildNumberPreferenceController.java
++++ b/packages/apps/Settings/src/com/android/settings/deviceinfo/BuildNumberPreferenceController.java
+@@ -25,6 +25,7 @@ import android.content.pm.ResolveInfo;
+ import android.os.Build;
+ import android.os.UserHandle;
+ import android.os.UserManager;
++import android.provider.Settings;
+ import android.text.BidiFormatter;
+ import android.text.TextUtils;
+ import android.widget.Toast;
+@@ -137,6 +138,11 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
+             return false;
+         }
+ 
++        // Support disabling by Settings.
++        if (Settings.Secure.getInt(mContext.getContentResolver(), "enable_developer_mode", 0) != 1) {
++            return false;
++        }
++
+         if (mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
+             if (mUm.isDemoUser()) {
+                 // Route to demo device owner to lift the debugging restriction.
